@@ -25,7 +25,12 @@ class FormField(AbstractFormField):
 
 class ContactPage(AbstractEmailForm):
     # template = 'contact/contact_page.html'
+    def get_context(self, request):
+        context = super(ContactPage, self).get_context(request)
+        context['menuitems'] = request.site.root_page.get_descendants(
+            inclusive=True).live().in_menu()
 
+        return context
     intro = RichTextField(blank = True)
     thank_you_text = RichTextField(blank=True)
 
