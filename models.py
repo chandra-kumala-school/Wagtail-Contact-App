@@ -47,4 +47,4 @@ class ContactPage(AbstractEmailForm, Seo):
         ], heading='Email Settings'),
     ]
     
-    promote_panels = Page.promote_panels + Seo.panels
+    promote_panels = AbstractEmailForm.promote_panels + Seo.panels
