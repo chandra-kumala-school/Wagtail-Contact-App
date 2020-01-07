@@ -12,7 +12,7 @@ from wagtail.contrib.forms.models import (
     AbstractEmailForm,
     AbstractFormField
 )
-
+from tools.models import Seo
 # Create your models here.
 
 class FormField(AbstractFormField):
@@ -23,7 +23,7 @@ class FormField(AbstractFormField):
     )
 
 
-class ContactPage(AbstractEmailForm):
+class ContactPage(AbstractEmailForm, Seo):
     # template = 'contact/contact_page.html'
     def get_context(self, request):
         context = super(ContactPage, self).get_context(request)
@@ -46,3 +46,5 @@ class ContactPage(AbstractEmailForm):
             FieldPanel('subject'),
         ], heading='Email Settings'),
     ]
+    
+    promote_panels = Page.promote_panels + Seo.panels
