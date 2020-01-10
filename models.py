@@ -24,7 +24,7 @@ class FormField(AbstractFormField):
 
 
 class ContactPage(AbstractEmailForm, Seo):
-    # template = 'contact/contact_page.html'
+    template = 'contact/contact_page.html'
     def get_context(self, request):
         context = super(ContactPage, self).get_context(request)
         context['menuitems'] = request.site.root_page.get_descendants(
@@ -48,3 +48,6 @@ class ContactPage(AbstractEmailForm, Seo):
     ]
     
     promote_panels = AbstractEmailForm.promote_panels + Seo.panels
+
+class ContactSinglePage(ContactPage):
+    template = 'contact/contact_single_page.html'
