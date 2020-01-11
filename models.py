@@ -48,6 +48,3 @@ class ContactPage(AbstractEmailForm, Seo):
     ]
     
     promote_panels = AbstractEmailForm.promote_panels + Seo.panels
-
-class ContactSinglePage(ContactPage):
-    template = 'contact/contact_single_page.html'
