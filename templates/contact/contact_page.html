@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
-{% load static i18n wagtailcore_tags %}
+{% load static i18n wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
 
 {% block content %}
 
 
-        {% include 'home/_nav.html' %}
         <!-- <h5 class="card-title">{{ page.title }}</h5> -->
         <p class="card-text">{{ self.intro|richtext }}</p>
       <form action="{% pageurl page %}" method="POST">
