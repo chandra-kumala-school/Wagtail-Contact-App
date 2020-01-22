@@ -48,6 +48,18 @@ class FormField(AbstractFormField):
 
 class ContactPage(AbstractEmailForm, Seo):
     body = StreamField(CommonStreamBlock(), null=True, blank=True,)
+    css_label = 'Add CSS (FontAwesome and Bootstrap classes) '
+
+    button_css = models.CharField(max_length=300, 
+                    default='btn-success', 
+                    null=True, blank=True, 
+                    verbose_name= 'Button CSS',
+                    help_text= 'Classes from FontAwesome and Bootstrap can be used')
+    button_text = models.CharField(max_length=300, 
+                    default='Submit', 
+                    null=True, blank=True,
+                    help_text= 'FontAwesome icons can be used')
+ 
     template = 'contact/contact_page.html'
     def get_context(self, request):
         context = super(ContactPage, self).get_context(request)
@@ -62,6 +74,10 @@ class ContactPage(AbstractEmailForm, Seo):
         FieldPanel('intro'),
         StreamFieldPanel('body'),
         InlinePanel('form_fields', label='Form Fields'),
+        MultiFieldPanel([
+            FieldPanel('button_css'),
+            FieldPanel('button_text'),
+        ], heading='Button Settings'),
         FieldPanel('thank_you_text'),
         MultiFieldPanel([
             FieldRowPanel([
