@@ -47,7 +47,8 @@ class FormField(AbstractFormField):
 
 
 class ContactPage(AbstractEmailForm, Seo):
-    body = StreamField(CommonStreamBlock(), null=True, blank=True,)
+    intro = StreamField(CommonStreamBlock(), null=True, blank=True,)
+    thank_you_text = RichTextField(blank=True)
     css_label = 'Add CSS (FontAwesome and Bootstrap classes) '
 
     button_css = models.CharField(max_length=300, 
@@ -67,12 +68,9 @@ class ContactPage(AbstractEmailForm, Seo):
             inclusive=True).live().in_menu()
 
         return context
-    intro = RichTextField(blank = True)
-    thank_you_text = RichTextField(blank=True)
 
     content_panels = AbstractEmailForm.content_panels + [
-        FieldPanel('intro'),
-        StreamFieldPanel('body'),
+        StreamFieldPanel('intro'),
         InlinePanel('form_fields', label='Form Fields'),
         MultiFieldPanel([
             FieldPanel('button_css'),
