@@ -9,9 +9,8 @@
 {% block content %}
 
 
-<p class="card-text">{{ self.intro|richtext }}</p>
 
-{% for block in page.body %}
+{% for block in page.intro %}
 <article>
     {% if block.block_type == 'heading' %}
     <h2 class="text-center">{{ block.value }}</h2>
