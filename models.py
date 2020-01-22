@@ -12,8 +12,31 @@ from wagtail.contrib.forms.models import (
     AbstractEmailForm,
     AbstractFormField
 )
+from wagtail.core.blocks import URLBlock, TextBlock, StructBlock, StreamBlock, CharBlock, RichTextBlock
+from wagtail.embeds.blocks import EmbedBlock
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, MultiFieldPanel 
+from wagtail.core.fields import RichTextField, StreamField
 from tools.models import Seo
 # Create your models here.
+
+class CommonStreamBlock(StreamBlock):
+    heading = CharBlock(classname="full title", blank=True)
+    paragraph = RichTextBlock(blank=True)
+    embed = EmbedBlock(blank=True)
+    image = ImageChooserBlock(blank=True)
+    testimonial = StructBlock([
+        ('test_name', TextBlock(blank=True)),
+        ('test_quote', TextBlock(blank=True)),
+        ('test_pic', ImageChooserBlock(blank=True)),
+    ])
+    buttonLink = StructBlock([
+        ('text', TextBlock(blank=True)),
+        ('link', URLBlock(label="external URL", blank=True)),
+    ])
+
+    class Meta:
+        icon = 'cogs'
 
 class FormField(AbstractFormField):
     page = ParentalKey(
@@ -24,6 +47,7 @@ class FormField(AbstractFormField):
 
 
 class ContactPage(AbstractEmailForm, Seo):
+    body = StreamField(CommonStreamBlock(), null=True, blank=True,)
     template = 'contact/contact_page.html'
     def get_context(self, request):
         context = super(ContactPage, self).get_context(request)
@@ -36,6 +60,7 @@ class ContactPage(AbstractEmailForm, Seo):
 
     content_panels = AbstractEmailForm.content_panels + [
         FieldPanel('intro'),
+        StreamFieldPanel('body'),
         InlinePanel('form_fields', label='Form Fields'),
         FieldPanel('thank_you_text'),
         MultiFieldPanel([
