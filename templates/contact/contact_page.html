@@ -11,87 +11,92 @@
 <div class="card ">
     <div class='' style="position:relative;">
         <img class="card-img" src="{% static "images/card-header-small.jpg" %}" alt="Card image cap">
-            <img class="card-img-overlay d-flex justify-content-center align-items-center h-50 my-auto p-0" src="{% static "images/logo.svg" %}" width="100%" alt="Logo Image">
-    </div>  
-        <div class="main card-body">
-            <!-- {% include 'home/_nav.html' %} -->
-
-<!-- <h5 class="card-title">{{ page.title }}</h5> -->
-
-{% for block in page.intro %}
-<article>
-    {% if block.block_type == 'heading' %}
-    <h2 class="text-center">{{ block.value }}</h2>
-    {% elif block.block_type == 'paragraph' %}
-    {{ block.value }}
-    {% elif block.block_type == 'image' %}
-    {% image block.value width-400 class="full-width w-100 h-auto" alt="Responsive image" %}
-
-    {% elif block.block_type == 'testimonial' %}
-    <div class="d-flex justify-content-center w-100">
-    <div class="card mb-3 border-0" style="max-width: 540px;">
-  
-        <div class="row no-gutters {% if block.value.test_reversed %} row-reverse {% else %} blank {% endif %}">
-          <div class="col-md-4 my-auto">
-            {% image block.value.test_pic height-200 as tmp_photo %}
-            <img src="{{ tmp_photo.url }}" width="w-auto"
-                height="h-auto" alt="{{ tmp_photo.alt }}" class="card-img" />
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-                <div class="d-flex">
-                <span class=""><i class="fas fa-quote-left"></i></span>
-                <p class="card-text mx-2  text-center"> {{ block.value.test_quote }} </p>
-                <span class="align-self-end mb-2"><i class="fas fa-quote-right"></i></span>
-                </div>
-                <h5 class="card-title {% if block.value.test_reversed %} text-left {% else %} text-right {% endif %}"> {{ block.value.test_name }}</h5>
-            </div>
-          </div>
-        </div>
-      </div>
+        <img class="card-img-overlay d-flex justify-content-center align-items-center h-50 my-auto p-0"
+            src="{% static "images/logo.svg" %}" width="100%" alt="Logo Image">
     </div>
+    <div class="main card-body p-0">
+        <!-- {% include 'home/_nav.html' %} -->
 
-    {% elif block.block_type == 'embed' %}
-    <div class="youtube mx-auto">{{ block.value }}</div>
-    {% elif block.block_type == 'buttonLink' %}
-    <div class="row justify-content-center"><a class=" btn btn-primary btn-lg" href="{{ block.value.link }}" role="button">{{ block.value.text }}</a></div>
-    {% endif %}
-</article>
-{% endfor %}
+        <!-- <h5 class="card-title">{{ page.title }}</h5> -->
 
-<form action="{% pageurl page %}" method="POST">
-    {% csrf_token %}
+        {% for block in page.intro %}
+        <article>
+            {% if block.block_type == 'heading' %}
+            <h2 class="text-center">{{ block.value }}</h2>
+            {% elif block.block_type == 'paragraph' %}
+            {{ block.value }}
+            {% elif block.block_type == 'image' %}
+            {% image block.value width-400 class="full-width w-100 h-auto" alt="Responsive image" %}
 
-    {% for field in form.visible_fields %}
-    <div class="form-group mb-10">
-        {{ field.errors }}
-        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {% elif block.block_type == 'testimonial' %}
+            <div class="d-flex justify-content-center w-100">
+                <div class="card mb-3 border-0" style="max-width: 540px;">
 
-        {% if field.field.widget.input_type %}
+                    <div
+                        class="row no-gutters {% if block.value.test_reversed %} row-reverse {% else %} blank {% endif %}">
+                        <div class="col-md-4 my-auto">
+                            {% image block.value.test_pic height-200 as tmp_photo %}
+                            <img src="{{ tmp_photo.url }}" width="w-auto" height="h-auto" alt="{{ tmp_photo.alt }}"
+                                class="card-img" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <span class=""><i class="fas fa-quote-left"></i></span>
+                                    <p class="card-text mx-2  text-center"> {{ block.value.test_quote }} </p>
+                                    <span class="align-self-end mb-2"><i class="fas fa-quote-right"></i></span>
+                                </div>
+                                <h5
+                                    class="card-title {% if block.value.test_reversed %} text-left {% else %} text-right {% endif %}">
+                                    {{ block.value.test_name }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <input type="{% if field.field.widget.input_type == 'number' %}
+            {% elif block.block_type == 'embed' %}
+            <div class="youtube mx-auto">{{ block.value }}</div>
+            {% elif block.block_type == 'buttonLink' %}
+            <div class="row justify-content-center"><a class=" btn btn-primary btn-lg" href="{{ block.value.link }}"
+                    role="button">{{ block.value.text }}</a></div>
+            {% endif %}
+        </article>
+        {% endfor %}
+
+        <form action="{% pageurl page %}" method="POST">
+            {% csrf_token %}
+
+            {% for field in form.visible_fields %}
+            <div class="form-group mb-10">
+                {{ field.errors }}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+                {% if field.field.widget.input_type %}
+
+                <input type="{% if field.field.widget.input_type == 'number' %}
                               tel
                          {% else %}
                               {{ field.field.widget.input_type }}
                          {% endif %}" class="form-control" name="{{ field.name }}" id="{{ field.id_for_label }}"
-            placeholder="{{ field.help_text }}" {% if field.field.required %}required="required" {% endif %}>
+                    placeholder="{{ field.help_text }}" {% if field.field.required %}required="required" {% endif %}>
 
-        {% else %}
+                {% else %}
 
-        <textarea type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}"
-            id="{{ field.id_for_label }}" placeholder="{{ field.help_text|safe  }}"
-            {% if field.field.required %}required="required" {% endif %}></textarea>
+                <textarea type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}"
+                    id="{{ field.id_for_label }}" placeholder="{{ field.help_text|safe  }}"
+                    {% if field.field.required %}required="required" {% endif %}></textarea>
 
-        {% endif %}
+                {% endif %}
+            </div>
+            {% endfor %}
+            <div class="d-flex w-100 justify-content-center">
+                <button type="submit" class="btn {{ self.button_css }}"><i class="{{ self.fa_left}}"></i>
+                    {{ self.button_text|safe }} <i class="{{ self.fa_right}}"></i></button>
+            </div>
+        </form>
+
     </div>
-    {% endfor %}
-    <div class="d-flex w-100 justify-content-center">
-        <button type="submit" class="btn {{ self.button_css }}"><i class="{{ self.fa_left}}"></i>
-            {{ self.button_text|safe }} <i class="{{ self.fa_right}}"></i></button>
-    </div>
-</form>
-
-</div>
 </div>
 
 {% endblock content %}
