@@ -12,7 +12,7 @@ from wagtail.contrib.forms.models import (
     AbstractEmailForm,
     AbstractFormField
 )
-from wagtail.core.blocks import URLBlock, TextBlock, StructBlock, StreamBlock, CharBlock, RichTextBlock
+from wagtail.core.blocks import URLBlock, TextBlock, StructBlock, StreamBlock, CharBlock, RichTextBlock, BooleanBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, MultiFieldPanel 
@@ -31,6 +31,7 @@ class CommonStreamBlock(StreamBlock):
     testimonial = StructBlock([
         ('test_name', TextBlock(blank=True)),
         ('test_quote', TextBlock(blank=True)),
+        ('test_reversed', BooleanBlock(required=False, default=False)),
         ('test_pic', ImageChooserBlock(blank=True)),
     ])
     buttonLink = StructBlock([
