@@ -17,7 +17,10 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, MultiFieldPanel 
 from wagtail.core.fields import RichTextField, StreamField
-from tools.models import Seo
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
+
+from wagtail.snippets.models import register_snippet
 # Create your models here.
 
 class CommonStreamBlock(StreamBlock):
@@ -37,6 +40,19 @@ class CommonStreamBlock(StreamBlock):
 
     class Meta:
         icon = 'cogs'
+
+
+@register_snippet
+class Google(models.Model):
+    site_tag = models.CharField(max_length=255)
+
+    panels = [
+        FieldPanel('site_tag'),
+    ]
+
+    def __str__(self):
+        return "Google Site Tag : " + self.site_tag
+
 
 class FormField(AbstractFormField):
     page = ParentalKey(
