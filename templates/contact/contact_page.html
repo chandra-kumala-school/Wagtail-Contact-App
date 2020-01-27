@@ -4,6 +4,8 @@
 
 {% block extra_css %}
 
+<link href="https://fonts.googleapis.com/css?family=Caveat+Brush&display=swap" rel="stylesheet">
+
 {% endblock extra_css %}
 
 {% block content %}
@@ -34,20 +36,20 @@
 
                     <div
                         class="row no-gutters {% if block.value.test_reversed %} row-reverse {% else %} blank {% endif %}">
-                        <div class="col-md-4 my-auto">
-                            {% image block.value.test_pic height-200 as tmp_photo %}
-                            <img src="{{ tmp_photo.url }}" width="w-auto" height="h-auto" alt="{{ tmp_photo.alt }}"
-                                class="card-img" />
+                        <div class="col-md-4 my-auto text-center">
+                            {% image block.value.test_pic height-200 as photo %}
+                            <img src="{{ photo.url }}" width="w-auto" height="h-auto" alt="{{ photo.alt }}"
+                                class="card-img py-2 col-6 col-md-12" />
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body">
+                            <div class="card-body py-2">
                                 <div class="d-flex">
-                                    <span class=""><i class="fas fa-quote-left"></i></span>
-                                    <p class="card-text mx-2  text-center"> {{ block.value.test_quote }} </p>
-                                    <span class="align-self-end mb-2"><i class="fas fa-quote-right"></i></span>
+                                    <span class=" text-dark"><i class="fas fa-quote-left"></i></span>
+                                    <p class="card-text signature text-dark mx-2  text-center"> {{ block.value.test_quote }} </p>
+                                    <span class="align-self-end mb-2 text-dark"><i class="fas fa-quote-right"></i></span>
                                 </div>
                                 <h5
-                                    class="card-title {% if block.value.test_reversed %} text-left {% else %} text-right {% endif %}">
+                                    class="card-title fa-2x signature text-dark {% if block.value.test_reversed %} text-left {% else %} text-right {% endif %}">
                                     {{ block.value.test_name }}</h5>
                             </div>
                         </div>
