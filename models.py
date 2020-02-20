@@ -23,24 +23,6 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 # Create your models here.
 
-class CommonStreamBlock(StreamBlock):
-    heading = CharBlock(classname="full title", blank=True)
-    paragraph = RichTextBlock(blank=True)
-    embed = EmbedBlock(blank=True)
-    image = ImageChooserBlock(blank=True)
-    testimonial = StructBlock([
-        ('test_name', TextBlock(blank=True)),
-        ('test_quote', TextBlock(blank=True)),
-        ('test_reversed', BooleanBlock(required=False, default=False)),
-        ('test_pic', ImageChooserBlock(blank=True)),
-    ])
-    buttonLink = StructBlock([
-        ('text', TextBlock(blank=True)),
-        ('link', URLBlock(label="external URL", blank=True)),
-    ])
-
-    class Meta:
-        icon = 'cogs'
 
 class Seo(models.Model):
     ''' Add extra seo fields to pages such as icons. '''
