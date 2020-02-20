@@ -5,21 +5,29 @@ from wagtail.admin.edit_handlers import (
     FieldPanel,
     FieldRowPanel,
     InlinePanel,
-    MultiFieldPanel
+    MultiFieldPanel,
+    StreamFieldPanel
 )
-from wagtail.core.fields import RichTextField
+from wagtail.core.fields import (
+    RichTextField, 
+    StreamField
+)
+from wagtail.core.blocks import (
+    URLBlock, 
+    TextBlock, 
+    StructBlock, 
+    StreamBlock, 
+    CharBlock, 
+    RichTextBlock, 
+    BooleanBlock
+)
 from wagtail.contrib.forms.models import (
     AbstractEmailForm,
     AbstractFormField
 )
-from wagtail.core.blocks import URLBlock, TextBlock, StructBlock, StreamBlock, CharBlock, RichTextBlock, BooleanBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, MultiFieldPanel 
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
-
 from wagtail.snippets.models import register_snippet
 # Create your models here.
 
