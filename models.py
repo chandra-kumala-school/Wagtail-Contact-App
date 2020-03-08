@@ -29,6 +29,8 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
+from streams.blocks import CommonStreamBlock
+
 # Create your models here.
 
 
