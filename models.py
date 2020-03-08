@@ -125,4 +125,4 @@ class ContactPage(AbstractEmailForm, Seo):
     promote_panels = AbstractEmailForm.promote_panels + Seo.panels
 
 class OrphanContactPage(ContactPage):
-        template = 'home/orphan_contact_page.html'
+        template = 'contact/orphan_contact_page.html'
